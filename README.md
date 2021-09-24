@@ -3,7 +3,7 @@
 [![CI tests](https://github.com/adaa-polsl/RuleKit/workflows/Java%20project%20workflow/badge.svg)](https://github.com/adaa-polsl/RuleKit/actions)
 
 
-Rule-based models are often used for data analysis as they combine interpretability with predictive power. We present RuleKit, a versatile tool for rule learning. Based on a sequential covering induction algorithm, it is suitable for classification, regression, and survival problems. The presence of user-guided induction mode facilitates verifying hypotheses concerning data dependencies which are expected or of interest. The powerful and flexible experimental environment allows straightforward investigation of different induction schemes. The analysis can be performed in batch mode, through RapidMiner plugin, or R package. A documented Java API is also provided for convenience. 
+Rule-based models are often used for data analysis as they combine interpretability with predictive power. We present RuleKit, a versatile tool for rule learning. Based on a sequential covering induction algorithm, it is suitable for classification, regression, and survival problems. The presence of user-guided induction mode facilitates verifying hypotheses concerning data dependencies which are expected or of interest. The powerful and flexible experimental environment allows straightforward investigation of different induction schemes. The analysis can be performed in batch mode, through RapidMiner plugin, as well as R package and [Python](https://github.com/adaa-polsl/RuleKit-python) packages. A documented Java API is also provided for convenience. 
 
 RuleKit provides all the functionalities included in our previous packages:
 * [LR-Rules](https://github.com/adaa-polsl/LR-Rules) (Wróbel et al, 2017) for survival rules induction,
@@ -73,6 +73,10 @@ Then, build the package with *Install and Restart* button (the appropiate versio
 Below we present a survival analysis of *BMT-Ch* dataset with RuleKit R package. The set concerns the problem of analyzing factors contributing to the patients’ survival following bone marrow transplants. In order to perform the experiment, please run [./examples/survival.R](./examples/survival.R) script in R. As a result, a rule model is trained and survival function estimates for the entire dataset and for the rules are plotted.
  
 [This Wiki section](../../wiki/3-R-package) contains detailed information on using RuleKit R package. 
+
+## Python package
+
+Rulekit Python package can be found [here](https://github.com/adaa-polsl/RuleKit-python)
 
 # Documentation
 
