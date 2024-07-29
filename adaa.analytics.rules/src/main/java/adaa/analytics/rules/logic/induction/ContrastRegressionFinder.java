@@ -32,9 +32,9 @@ public class ContrastRegressionFinder extends RegressionFinder implements IPenal
         @Override
         public double calculate(ExampleSet dataset, ContingencyTable ct) {
 
-            ContrastRegressionExampleSet cer = (dataset instanceof ContrastExampleSet) ? (ContrastRegressionExampleSet)dataset : null;
+            ContrastRegressionExampleSet cer = (dataset instanceof ContrastRegressionExampleSet) ? (ContrastRegressionExampleSet)dataset : null;
             if (cer == null) {
-                throw new InvalidParameterException("ContrastSurvivalRuleSet supports only ContrastRegressionExampleSet instances");
+                throw new InvalidParameterException("ContrastRegressionRuleSet supports only ContrastRegressionExampleSet instances");
             }
 
             Covering cov = (Covering)ct;
@@ -76,6 +76,11 @@ public class ContrastRegressionFinder extends RegressionFinder implements IPenal
         params.setPruningMeasure(new NegativeControlledMeasure(m, params.getMaxcovNegative()));
         params.setVotingMeasure(m);
         params.setMeanBasedRegression(false);
+    }
+
+    public ExampleSet preprocess(ExampleSet trainSet) {
+        super.preprocess(trainSet);
+        return trainSet; // return original one
     }
 
     /**
@@ -133,8 +138,8 @@ public class ContrastRegressionFinder extends RegressionFinder implements IPenal
         notifyRuleReady(rule);
     }
 
-
-    boolean checkCoverage(double p, double n, double new_p, double new_n, double P, double N) {
+    @Override
+    boolean checkCoverage(double p, double n, double new_p, double new_n, double P, double N,double uncoveredSize, int ruleOrderNum) {
         return ((new_p) >= params.getAbsoluteMinimumCovered(P)) &&
                 ((p) >= params.getAbsoluteMinimumCoveredAll(P));
     }

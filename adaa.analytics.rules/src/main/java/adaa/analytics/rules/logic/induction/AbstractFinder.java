@@ -181,7 +181,7 @@ public abstract class AbstractFinder implements AutoCloseable {
 				
 				if (params.getMaxGrowingConditions() > 0) {
 					if (rule.getPremise().getSubconditions().size() - initialConditionsCount >= 
-						params.getMaxGrowingConditions() * dataset.getAttributes().size()) {
+						params.getMaxGrowingConditions()) {
 						carryOn = false;
 					}
 				}
@@ -223,6 +223,11 @@ public abstract class AbstractFinder implements AutoCloseable {
 			final Set<Integer> uncovered) {
 		
 		Logger.log("AbstractFinder.prune()\n", Level.FINE);
+
+		if (rule.getPremise().getSubconditions().size() == 1) {
+			return;
+		}
+
 		boolean weighting = (trainSet.getAttributes().getWeight() != null);
 		
 		// check preconditions
@@ -380,7 +385,7 @@ public abstract class AbstractFinder implements AutoCloseable {
 			int toGenerateRulesCount = params.getMaxRuleCount()- ruleOrderNum;
 			double fractionCurrentGeneration = 1.0 / (double) toGenerateRulesCount;
 			return fractionCurrentGeneration * sizeToCover;
-		} else if (uncoveredSize < params.getAbsoluteMinimumCovered(size)) {
+		} else if (uncoveredSize < params.getAbsoluteMinimumCovered(size) && params.isAdjustMinimumCovered()) {
 			return uncoveredSize;
 		} else {
 			return params.getAbsoluteMinimumCovered(size);
